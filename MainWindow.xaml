@@ -1,0 +1,28 @@
+<Window x:Class="frontendeinkaufsliste.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Einkaufsliste" Height="400" Width="600">
+    <Grid>
+        <StackPanel Margin="10">
+            <!-- Eingabefeld für das Hinzufügen eines neuen Items -->
+            <TextBox Name="NewItemTextBox" Width="300" Margin="0,0,0,10" PlaceholderText="Neues Item hinzufügen..." />
+            <Button Name="AddItemButton" Content="Hinzufügen" Width="100" Margin="0,0,0,20" Click="AddItemButton_Click"/>
+
+            <!-- Liste der Einkaufsitems -->
+            <ListBox Name="ShoppingListBox" Width="300" Height="200" DisplayMemberPath="Name" SelectionChanged="ShoppingListBox_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" FontSize="16" />
+                            <TextBlock Text="{Binding Quantity}" Foreground="Gray" />
+                            <TextBlock Text="{Binding Purchased, Converter={StaticResource PurchasedConverter}}" Foreground="Green" FontStyle="Italic"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <!-- Löschen Button (sichtbar nur wenn Item ausgewählt) -->
+            <Button Name="DeleteItemButton" Content="Löschen" Width="100" Margin="0,10,0,10" Click="DeleteItemButton_Click" HorizontalAlignment="Left" IsEnabled="False" />
+        </StackPanel>
+    </Grid>
+</Window>
